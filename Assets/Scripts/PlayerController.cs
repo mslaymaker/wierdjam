@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]//inspector properties to be modified for gameplay
@@ -29,6 +30,19 @@ public class PlayerController : MonoBehaviour
     [Header("Spotting Settings")]//how fast the egg must be moving before customers get suspicious
     [SerializeField] private float spotSpeed = 2f;
 
+    [Header("Audio")]//sounds related to egg movement and damage
+    [SerializeField] private AudioClip crackSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip rollingSound;
+
+    [SerializeField] private float crackVolume = 1f;
+    [SerializeField] private float jumpVolume = 1f;
+    [SerializeField] private float rollingMaxVolume = 1f;
+
+    [SerializeField] private float rollingFadeSpeed = 10f;
+    [SerializeField] private float rollingMinPitch = 0.8f;
+    [SerializeField] private float rollingMaxPitch = 1.5f;
+
     [Header("References")]//required reference to the camera
     [SerializeField] private Camera mainCamera;
 
@@ -50,9 +64,30 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    //used for jump and crack sounds
+    private AudioSource effectsSource;
+
+    //used exclusively for looping rolling audio
+    private AudioSource rollingSource;
+
     private void Awake()//grab required components before gameplay starts
     {
         rb = GetComponent<Rigidbody>();
+
+        effectsSource = GetComponent<AudioSource>();
+
+        rollingSource = gameObject.AddComponent<AudioSource>();
+
+        //configure rolling audio source
+        rollingSource.loop = true;
+        rollingSource.playOnAwake = false;
+        rollingSource.volume = 0f;
+
+        if (rollingSound != null)
+        {
+            rollingSource.clip = rollingSound;
+            rollingSource.Play();
+        }
 
         //allow damage immediately at the start of the game
         lastDamageTime = -damageCooldown;
@@ -76,6 +111,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         updateSpottedStatus();//check if customers should currently be suspicious of us
+
+        updateRollingAudio();//adjust rolling sound based on movement speed
     }
 
     //record movement values from the input system
@@ -101,6 +138,27 @@ public class PlayerController : MonoBehaviour
     private void updateSpottedStatus()//decide if customers currently consider the egg suspicious
     {
         isSpotted = activeCustomerTriggers.Count > 0 && getCurrentSpeed() >= spotSpeed;
+    }
+
+    private void updateRollingAudio()//rolling gets louder and higher pitched as the egg moves faster
+    {
+        if (rollingSource == null) return;
+
+        float speedPercent = Mathf.Clamp01(getCurrentSpeed() / maxSpeed);
+
+        float targetVolume = 0f;
+
+        //only produce rolling sounds while grounded
+        if (isGrounded && speedPercent > 0.05f)
+        {
+            targetVolume = speedPercent * rollingMaxVolume;
+        }
+
+        //higher speed means a higher pitch
+        rollingSource.pitch = Mathf.Lerp(rollingMinPitch, rollingMaxPitch, speedPercent);
+
+        //smoothly fade volume instead of cutting off instantly during jumps
+        rollingSource.volume = Mathf.Lerp(rollingSource.volume, targetVolume, rollingFadeSpeed * Time.deltaTime);
     }
 
     private void move()//apply rolling force relative to the camera direction
@@ -141,6 +199,12 @@ public class PlayerController : MonoBehaviour
     private void jump()//launch the egg upward with extreme enthusiasm
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        //play jump sound
+        if (jumpSound != null)
+        {
+            effectsSource.PlayOneShot(jumpSound, jumpVolume);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)//figure out how badly we bonked into something
@@ -171,6 +235,12 @@ public class PlayerController : MonoBehaviour
         if (damageAmount > 0)
         {
             lastDamageTime = Time.time;
+
+            //play the egg cracking sound effect
+            if (crackSound != null)
+            {
+                effectsSource.PlayOneShot(crackSound, crackVolume);
+            }
 
             //tell the game manager that the egg made a poor decision
             GameManager.instance.takeDamage(damageAmount);
