@@ -3,22 +3,19 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [Header("References")]//player object for the camera to follow around
+    [Header("References")]// Player object for the camera to follow around
     [SerializeField] private GameObject player;
 
-    [Header("Follow Settings")]//camera movement settings
+    [Header("Camera Settings")]
+    // camera zoom and rotation settings
     [SerializeField] private float followSpeed = 5f;
     [SerializeField] private float followDistance = 8f;
     [SerializeField] private float heightOffset = 3f;
-
-    [Header("Zoom Settings")]//settings for mouse wheel zooming
     [SerializeField] private float zoomSpeed = 0.05f;
     [SerializeField] private float minZoom = 3f;
     [SerializeField] private float maxZoom = 15f;
-
-    [Header("Rotation Settings")]//settings for rotating around the player
-    [SerializeField] private float rotationSpeed = 150f;
-    [SerializeField] private float minPitch = 15f;
+    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float minPitch = 10f;
     [SerializeField] private float maxPitch = 70f;
 
     //current camera orbit around the player
@@ -35,13 +32,14 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        handleZoom();//scroll wheel controls zoom distance
+        //scroll wheel controls zoom distance
+        handleZoom();
         handleRotation();//click and drag to orbit around the player
     }
 
-    private void LateUpdate()//follow after the player has finished bouncing all over the place
+    private void LateUpdate()
     {
-        followPlayer();
+        followPlayer();//follow after the player has finished bouncing all over the place
     }
 
     private void handleZoom()//use mouse wheel to move the camera closer or farther away
@@ -50,7 +48,7 @@ public class CameraController : MonoBehaviour
 
         float scroll = Mouse.current.scroll.ReadValue().y;
 
-        if (scroll != 0)
+        if (scroll != 0)//check to see if mouse is moving
         {
             //adjust how far behind the player the camera wants to sit
             followDistance -= scroll * zoomSpeed;
@@ -60,13 +58,14 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void handleRotation()//hold left click and drag to orbit around the player
+    private void handleRotation()
+    //hold left click and drag to orbit around the player
     {
         if (Mouse.current == null) return;
 
         //lock the cursor while rotating so it doesn't wander off the game window
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
+
+        if (Mouse.current.leftButton.wasPressedThisFrame){
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -82,28 +81,24 @@ public class CameraController : MonoBehaviour
 
             //left and right movement swings around the player
             orbitYaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
-
-            //up and down movement tilts the camera
+           //up and down movement tilts up the camera
             orbitPitch -= mouseDelta.y * rotationSpeed * Time.deltaTime;
 
-            //don't let the player flip the camera upside down like a maniac
+            //don't let the player flip the camera upside down like a maniac...lets limit the values
             orbitPitch = Mathf.Clamp(orbitPitch, minPitch, maxPitch);
         }
     }
 
-    private void followPlayer()//figure out where the camera should be and smoothly chase it
-    {
-        if (player == null) return;
+    private void followPlayer()
+    //figure out where the camera should be and smoothly chase it
+    {if (player == null) return;
 
         //aim slightly above the player so we're not staring at their feet all day
         Vector3 targetPosition = player.transform.position + Vector3.up * heightOffset;
-
-        //build a rotation from the current orbit angles
+        //build a rotation from the current orbit angle things
         Quaternion rotation = Quaternion.Euler(orbitPitch, orbitYaw, 0f);
-
-        //park the camera behind the player using the desired zoom distance
+       //park the camera behind the player using the desired zoom distance from the variable for that
         Vector3 desiredPosition = targetPosition - (rotation * Vector3.forward * followDistance);
-
         //smoothly chase the target position instead of snapping to it
         transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
 

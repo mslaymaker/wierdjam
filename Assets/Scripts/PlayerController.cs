@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float torqueAmount = 10f;
     [SerializeField] private float jumpForce = 5f;
 
-    [Header("Ground Check")]//settings used to determine if the egg is touching the floor
+    [Header("Ground Check")]//settings used to determine WHETHER the egg is touching the floor
     [SerializeField] private float groundCheckDistance = 1.5f;
     [SerializeField] private LayerMask floorLayer;
 
@@ -35,22 +35,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip rollingSound;
 
-    [SerializeField] private float crackVolume = 1f;
+    [SerializeField] private float crackVolume = .75f;
     [SerializeField] private float jumpVolume = 1f;
-    [SerializeField] private float rollingMaxVolume = 1f;
+    [SerializeField] private float rollingMaxVolume = .75f;
 
-    [SerializeField] private float rollingFadeSpeed = 10f;
-    [SerializeField] private float rollingMinPitch = 0.8f;
+    [SerializeField] private float rollingFadeSpeed = 5f;
+    [SerializeField] private float rollingMinPitch = 0.7f;
     [SerializeField] private float rollingMaxPitch = 1.5f;
 
-    [Header("References")]//required reference to the camera
+    [Header("References")]//required reference to the camera so we can find and have access
     [SerializeField] private Camera mainCamera;
 
-    //values recorded from the input system
+    //values recorded from the input system to pass into our callback methods
     private Vector2 moveValue;
     private bool jumpValue;
 
-    //tracks whether the player is standing on valid ground
+    //tracks whether the player is standing on valid ground to jump or not, mark jumpable ground as floor
     [SerializeField] private bool isGrounded;
 
     //tracks whether at least one customer currently sees the player
@@ -59,31 +59,27 @@ public class PlayerController : MonoBehaviour
     //all customer vision triggers currently overlapping the player
     private HashSet<Collider> activeCustomerTriggers = new HashSet<Collider>();
 
-    //prevents several damage events from occurring back-to-back
-    private float lastDamageTime;
+    private float lastDamageTime;//prevents several damage events from occurring constantly, this is the delay iframes
 
     private Rigidbody rb;
 
     //used for jump and crack sounds
     private AudioSource effectsSource;
-
-    //used exclusively for looping rolling audio
-    private AudioSource rollingSource;
+    private AudioSource rollingSource;//used for looping rolling audio
 
     private void Awake()//grab required components before gameplay starts
     {
         rb = GetComponent<Rigidbody>();
-
         effectsSource = GetComponent<AudioSource>();
-
+//
         rollingSource = gameObject.AddComponent<AudioSource>();
 
-        //configure rolling audio source
+        //set up the rolling audio source
         rollingSource.loop = true;
         rollingSource.playOnAwake = false;
         rollingSource.volume = 0f;
 
-        if (rollingSound != null)
+        if (rollingSound != null)//maker sure one is applied so we don't crash the game
         {
             rollingSource.clip = rollingSound;
             rollingSource.Play();
@@ -111,7 +107,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         updateSpottedStatus();//check if customers should currently be suspicious of us
-
         updateRollingAudio();//adjust rolling sound based on movement speed
     }
 
@@ -153,10 +148,8 @@ public class PlayerController : MonoBehaviour
         {
             targetVolume = speedPercent * rollingMaxVolume;
         }
-
         //higher speed means a higher pitch
         rollingSource.pitch = Mathf.Lerp(rollingMinPitch, rollingMaxPitch, speedPercent);
-
         //smoothly fade volume instead of cutting off instantly during jumps
         rollingSource.volume = Mathf.Lerp(rollingSource.volume, targetVolume, rollingFadeSpeed * Time.deltaTime);
     }
@@ -173,35 +166,31 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         Vector3 moveDirection = forward * moveValue.y + right * moveValue.x;
-
         if (moveDirection.sqrMagnitude > 0.01f)
         {
             //push the egg in the desired direction
             rb.AddForce(moveDirection.normalized * moveForce, ForceMode.Acceleration);
-
-            //spin the egg so it actually looks like it's rolling
+            //spin the egg so it actually looks like it's rolling and not sliding
             Vector3 rollAxis = Vector3.Cross(Vector3.up, moveDirection.normalized);
-
             rb.AddTorque(rollAxis * torqueAmount, ForceMode.Acceleration);
         }
 
         Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
         if (horizontalVelocity.magnitude > maxSpeed)
         {
             horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
 
-            //keep the player from becoming an olympic egg sprinter
+            //keep the player from becoming an olympic egg sprinter...
             rb.linearVelocity = new Vector3(horizontalVelocity.x, rb.linearVelocity.y, horizontalVelocity.z);
         }
     }
 
-    private void jump()//launch the egg upward with extreme enthusiasm
+    private void jump()//launch the egg upward with extreme enthusiasm!!!
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        //play jump sound
-        if (jumpSound != null)
+        
+        if (jumpSound != null)//play jump sound
         {
             effectsSource.PlayOneShot(jumpSound, jumpVolume);
         }
@@ -218,7 +207,7 @@ public class PlayerController : MonoBehaviour
     private void takeDamage(float collisionSpeed)//damage depends on how hard we slammed into something
     {
         int damageAmount = 0;
-
+//check each threshold value for appropriate damage that should be assigned when hit hard
         if (collisionSpeed >= highDamageSpeed)
         {
             damageAmount = highDamageAmount;

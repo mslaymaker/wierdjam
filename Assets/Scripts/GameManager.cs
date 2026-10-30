@@ -11,27 +11,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float maxSuspicion = 100f;
     [SerializeField] private float susIncreaseRate = 5f;
     [SerializeField] private float susDecreaseRate = 3f;
-
-    [Header("Suspicion Delays")]//time before suspicion starts changing
     [SerializeField] private float spottedDelay = 1f;
     [SerializeField] private float hiddenDelay = 2f;
 
-    [Header("Debug")]//settings for debug messages
+
     [SerializeField] private float suspicionLogThreshold = 1f;
 
-    [Header("References")]//required references for gameplay systems
+    [Header("References")]//required references for my gameplay systems
     [SerializeField] private PlayerController player;
 
-    //current health of the egg
+    //current health of the egg thingamajig
     [SerializeField] private int currentHealth;
 
     //current suspicion level in the store
     [SerializeField] private float currentSuspicion;
 
-    //tracks whether the game has already ended
-    private bool gameOver;
+   
+    private bool gameOver; //tracks whether the game has already ended
 
-    //timers used to control suspicion delays
+    //TImers used to control suspicion delays
     private float spottedTimer;
     private float hiddenTimer;
 
@@ -151,7 +149,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void winGame()//the egg escaped the store
+    public void winGame()//the egg escaped the store...good jobby!
     {
         if (gameOver) return;
 
@@ -160,7 +158,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("YOU WIN!!! The egg has escaped!");
     }
 
-    public void loseGame()//the customers were not fooled
+    public void loseGame()//the customers were not fooled...bad egg...
     {
         if (gameOver) return;
 
