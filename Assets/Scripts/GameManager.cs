@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Player Settings")]//settings related to the egg's health
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 10;
 
     [Header("Suspicion Settings")]//settings for how suspicious the customers are
     [SerializeField] private float maxSuspicion = 100f;
