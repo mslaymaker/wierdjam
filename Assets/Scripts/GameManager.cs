@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float spottedDelay = 1f;
     [SerializeField] private float hiddenDelay = 2f;
 
-
+    [Header("Debug Settings")]//controls debug output
     [SerializeField] private float suspicionLogThreshold = 1f;
+
+    [Header("Scene Settings")]//scenes loaded when winning or losing
+    [SerializeField] private string gameOverScene;
+    [SerializeField] private string winScene;
 
     [Header("References")]//required references for my gameplay systems
     [SerializeField] private PlayerController player;
@@ -26,10 +31,10 @@ public class GameManager : MonoBehaviour
     //current suspicion level in the store
     [SerializeField] private float currentSuspicion;
 
-   
-    private bool gameOver; //tracks whether the game has already ended
+    //tracks whether the game has already ended
+    private bool gameOver;
 
-    //TImers used to control suspicion delays
+    //timers used to control suspicion delays
     private float spottedTimer;
     private float hiddenTimer;
 
@@ -156,6 +161,11 @@ public class GameManager : MonoBehaviour
         gameOver = true;
 
         Debug.Log("YOU WIN!!! The egg has escaped!");
+
+        if (!string.IsNullOrEmpty(winScene))
+        {
+            SceneManager.LoadScene(winScene);
+        }
     }
 
     public void loseGame()//the customers were not fooled...bad egg...
@@ -165,11 +175,26 @@ public class GameManager : MonoBehaviour
         gameOver = true;
 
         Debug.Log("GAME OVER!!! Better luck next hatch.");
+
+        if (!string.IsNullOrEmpty(gameOverScene))
+        {
+            SceneManager.LoadScene(gameOverScene);
+        }
     }
 
     public int getCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float getHealthPercent()
+    {
+        return (float)currentHealth / maxHealth;
     }
 
     public float getCurrentSuspicion()
