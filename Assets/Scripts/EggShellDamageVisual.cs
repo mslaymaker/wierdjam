@@ -3,14 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class EggShellDamageVisual : MonoBehaviour
 {
-    [Header("References")]//reference to the object containing the game manager
+    [Header("References")]// reference to the game manager object
     [SerializeField] private GameObject gameManagerObject;
 
-    [Header("Materials")]//materials representing different crack states
-    [SerializeField] private Material uncrackedMaterial;
-    [SerializeField] private Material crackLevel1Material;
-    [SerializeField] private Material crackLevel2Material;
-    [SerializeField] private Material crackLevel3Material;
+    [Header("Materials")]//materials representing different cracks
+    [SerializeField] private Material baseMat;
+    [SerializeField] private Material crack1;
+    [SerializeField] private Material crack2;
+    [SerializeField] private Material crack3;
 
     private GameManager gameManager;
     private Renderer shellRenderer;
@@ -22,7 +22,7 @@ public class EggShellDamageVisual : MonoBehaviour
     {
         shellRenderer = GetComponent<Renderer>();
 
-        if (gameManagerObject != null)
+        if (gameManagerObject != null)//check to see if manager is assigned, if not then we can't grab it and will crash
         {
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
@@ -30,7 +30,7 @@ public class EggShellDamageVisual : MonoBehaviour
 
     private void Start()//set the initial shell appearance
     {
-        updateShellMaterial();
+        matChange();
     }
 
     private void Update()
@@ -39,41 +39,45 @@ public class EggShellDamageVisual : MonoBehaviour
 
         int currentHealth = gameManager.getCurrentHealth();
 
-        //only update when health changes
-        if (currentHealth != lastHealth)
+        
+        if (currentHealth != lastHealth)//only update when health changes...saves us needing to change materials each frame if not neccessary
         {
-            updateShellMaterial();
+            matChange();
         }
     }
 
-    private void updateShellMaterial()//change shell appearance based on remaining health
+    private void matChange()//change shell appearance based on remaining health
     {
-        int currentHealth = gameManager.getCurrentHealth();
+        int currentHealth = gameManager.getCurrentHealth();//get the health from the game manager
 
         lastHealth = currentHealth;
 
-        //healthy egg
+        //healthy egg...freaking pristine!
         if (currentHealth >= 8)
         {
-            shellRenderer.material = uncrackedMaterial;
+            shellRenderer.material = baseMat;
         }
 
         //slightly cracked
-        else if (currentHealth >= 5)
+        if (currentHealth >= 5)
         {
-            shellRenderer.material = crackLevel1Material;
+            shellRenderer.material = crack1;
+            Debug.Log("crack1");
         }
 
         //moderately cracked
-        else if (currentHealth >= 2)
+        if (currentHealth >= 2)
         {
-            shellRenderer.material = crackLevel2Material;
+            shellRenderer.material = crack2;
+            Debug.Log("crack2");
         }
 
-        //barely holding together
+        //hold together egg..you are breaking!!!
         else if (currentHealth >= 1)
         {
-            shellRenderer.material = crackLevel3Material;
+            shellRenderer.material = crack3;
+            Debug.Log("crack3");
         }
+
     }
 }
