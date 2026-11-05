@@ -10954,6 +10954,28 @@ MonoBehaviour:
   crack1: {fileID: 2100000, guid: 9fcfa85ba58fe3843b5e9cceab40342a, type: 2}
   crack2: {fileID: 2100000, guid: cfba407a87028e9429a607c859a295ec, type: 2}
   crack3: {fileID: 2100000, guid: a8b0ca599f4f8c24abf0fc81681760b7, type: 2}
+--- !u!95 &1073232896
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073232891}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c69cb25c471d9648ae451415778f6bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1084875730
 GameObject:
   m_ObjectHideFlags: 0
@@ -21999,6 +22021,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7634913329706539629, guid: a5b091fadfb6e674db75646537939887, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22009,6 +22035,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3667024285301561100, guid: a5b091fadfb6e674db75646537939887, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1073232895}
+    - targetCorrespondingSourceObject: {fileID: 3667024285301561100, guid: a5b091fadfb6e674db75646537939887, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1073232896}
   m_SourcePrefab: {fileID: 100100000, guid: a5b091fadfb6e674db75646537939887, type: 3}
 --- !u!1001 &2035609468
 PrefabInstance:
