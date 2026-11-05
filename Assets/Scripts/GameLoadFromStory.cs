@@ -18,7 +18,22 @@ public class DelayedSceneLoader : MonoBehaviour
     private IEnumerator loadSceneAfterDelay()//wait for the desired time then load the next scene
     {
         yield return new WaitForSeconds(delayTime);
-
+        DestroyTargetObject();//kill the music manager
         SceneManager.LoadScene(sceneName);
+    }
+    public void DestroyTargetObject()//finds the music manager to kill it
+    {
+        // Find the GameObject using the specified tag
+        GameObject musicObj = GameObject.FindWithTag("MusicObject");
+
+        if (musicObj != null)
+        {
+            Destroy(musicObj);
+            Debug.Log("MusicObject successfully found and destroyed!");
+        }
+        else
+        {
+            Debug.LogWarning("Could not find any GameObject with the tag 'MusicObject'.");
+        }
     }
 }
