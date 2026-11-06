@@ -1,28 +1,31 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [Header("Player Settings")]//settings related to the egg's health
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 10;
 
     [Header("Suspicion Settings")]//settings for how suspicious the customers are
     [SerializeField] private float maxSuspicion = 100f;
     [SerializeField] private float susIncreaseRate = 5f;
     [SerializeField] private float susDecreaseRate = 3f;
-
-    [Header("Suspicion Delays")]//time before suspicion starts changing
     [SerializeField] private float spottedDelay = 1f;
     [SerializeField] private float hiddenDelay = 2f;
 
-    [Header("Debug")]//settings for debug messages
+    [Header("Debug Settings")]//controls debug output
     [SerializeField] private float suspicionLogThreshold = 1f;
 
-    [Header("References")]//required references for gameplay systems
+    [Header("Scene Settings")]//scenes loaded when winning or losing
+    [SerializeField] private string gameOverScene;
+    [SerializeField] private string winScene;
+
+    [Header("References")]//required references for my gameplay systems
     [SerializeField] private PlayerController player;
 
-    //current health of the egg
+    //current health of the egg thingamajig
     [SerializeField] private int currentHealth;
 
     //current suspicion level in the store
@@ -151,27 +154,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void winGame()//the egg escaped the store
+    public void winGame()//the egg escaped the store...good jobby!
     {
         if (gameOver) return;
 
         gameOver = true;
 
         Debug.Log("YOU WIN!!! The egg has escaped!");
+
+        if (!string.IsNullOrEmpty(winScene))
+        {
+            SceneManager.LoadScene(winScene);
+        }
     }
 
-    public void loseGame()//the customers were not fooled
+    public void loseGame()//the customers were not fooled...bad egg...
     {
         if (gameOver) return;
 
         gameOver = true;
 
         Debug.Log("GAME OVER!!! Better luck next hatch.");
+
+        if (!string.IsNullOrEmpty(gameOverScene))
+        {
+            SceneManager.LoadScene(gameOverScene);
+        }
     }
 
     public int getCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float getHealthPercent()
+    {
+        return (float)currentHealth / maxHealth;
     }
 
     public float getCurrentSuspicion()

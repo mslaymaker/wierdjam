@@ -15,7 +15,7 @@ public class HealthDisplay : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
-    private void Update()//show current health
+    private void Update()//show current health of the player to test
     {
         displayText.text = "Health : " + gameManager.getCurrentHealth();
     }
