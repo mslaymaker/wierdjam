@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float followDistance = 8f;
     [SerializeField] private float heightOffset = 3f;
 
-    [SerializeField] private float zoomSpeed = 5f;
+    [SerializeField] private float zoomSpeed = 40f;
     [SerializeField] private float minZoom = 3f;
     [SerializeField] private float maxZoom = 15f;
 

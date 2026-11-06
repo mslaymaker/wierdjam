@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: box1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 371013170db9b774c8ba7cf301b76d30, type: 3}
+      propertyPath: m_TagString
+      value: box
+      objectReference: {fileID: 0}
     - target: {fileID: 7418098771544918504, guid: 371013170db9b774c8ba7cf301b76d30, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

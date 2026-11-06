@@ -255,11 +255,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)//figure out how badly we bonked into something
-    {
-        if (Time.time < lastDamageTime + damageCooldown) return;
+{
+    //ignore damage during the cooldown period
+    if (Time.time < lastDamageTime + damageCooldown) return;
 
-        takeDamage(collision.relativeVelocity.magnitude);
-    }
+    //boxes are soft enough that they don't damage the egg
+    if (collision.gameObject.CompareTag("box")) return;
+
+    takeDamage(collision.relativeVelocity.magnitude);
+}
 
     private void takeDamage(float collisionSpeed)//damage depends on how hard we slammed into something
     {

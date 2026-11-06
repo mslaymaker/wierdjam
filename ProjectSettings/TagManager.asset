@@ -6,6 +6,7 @@ TagManager:
   tags:
   - customer
   - MusicObject
+  - box
   layers:
   - Default
   - TransparentFX

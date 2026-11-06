@@ -372,6 +372,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530990874142993220, guid: 9ac5ca26731501641b957e81473776b8, type: 3}
   m_PrefabInstance: {fileID: 13287718}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &25076431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+  m_PrefabInstance: {fileID: 507772237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &29419001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,10 +893,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Make your way into a bag at the checkout lane to fulfill your destiny!
+  m_text: Make your way into a bag at the checkout lane to fulfill your destiny!!!!!!!!!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
+  m_sharedMaterial: {fileID: -3235237343235751975, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2934,6 +2939,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 29419003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &252478020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+  m_PrefabInstance: {fileID: 399319813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &257241086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4136,7 +4146,7 @@ MonoBehaviour:
   followSpeed: 5
   followDistance: 8
   heightOffset: 3
-  zoomSpeed: 15
+  zoomSpeed: 30
   minZoom: 3
   maxZoom: 15
   rotationSpeed: 200
@@ -5011,6 +5021,10 @@ PrefabInstance:
     - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
       propertyPath: m_Name
       value: ArrowObject (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6363,6 +6377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowObject (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7587,6 +7605,7 @@ RectTransform:
   - {fileID: 1977525769}
   - {fileID: 89384919}
   - {fileID: 1930301044}
+  - {fileID: 1848220677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -16573,6 +16592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowObject (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17456,6 +17479,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3429461493605619247, guid: ecb76658a076701488a41e11aeb63969, type: 3}
   m_PrefabInstance: {fileID: 1327582383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1331351395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+  m_PrefabInstance: {fileID: 5807505917727235826}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1335541585
 GameObject:
@@ -18569,6 +18597,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1327745897677159778, guid: 37fea41b84c04ca45bf9cb48f01cced7, type: 3}
   m_PrefabInstance: {fileID: 1406682666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1416285820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+  m_PrefabInstance: {fileID: 1290692759}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1423941520
 GameObject:
@@ -21986,6 +22019,7 @@ GameObject:
   - component: {fileID: 1675106776}
   - component: {fileID: 1675106775}
   - component: {fileID: 1675106774}
+  - component: {fileID: 1675106777}
   m_Layer: 0
   m_Name: DoorSoundTrigger
   m_TagString: Untagged
@@ -22144,6 +22178,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1675106777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675106772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640aaf524654d064e85ef7badb7587c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerObjectToggler
+  objectsToEnable:
+  - {fileID: 25076431}
+  - {fileID: 252478020}
+  - {fileID: 1416285820}
+  objectsToDisable:
+  - {fileID: 1331351395}
 --- !u!1 &1682320897
 GameObject:
   m_ObjectHideFlags: 0
@@ -24018,6 +24070,99 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3035472920746403347, guid: 94c9a62bcae505a43b856f00c56af120, type: 3}
   m_PrefabInstance: {fileID: 1828354582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1848220676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848220677}
+  - component: {fileID: 1848220680}
+  - component: {fileID: 1848220679}
+  - component: {fileID: 1848220678}
+  m_Layer: 5
+  m_Name: EggDmg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1848220677
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848220676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 643582203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -464, y: 195}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1848220678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848220676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96a97016e57d864a98d158f5877fc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthDamageImageController
+  gameManagerObject: {fileID: 283783747}
+  damageLevel1Sprite: {fileID: -561908639, guid: 988f876bf6fa9e14289be115680ccb48, type: 3}
+  damageLevel2Sprite: {fileID: 1974680816, guid: 988f876bf6fa9e14289be115680ccb48, type: 3}
+  damageLevel3Sprite: {fileID: 663285691, guid: 988f876bf6fa9e14289be115680ccb48, type: 3}
+  damageLevel4Sprite: {fileID: -1314968771, guid: 988f876bf6fa9e14289be115680ccb48, type: 3}
+--- !u!114 &1848220679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848220676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -561908639, guid: 988f876bf6fa9e14289be115680ccb48, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1848220680
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848220676}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1860803224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26285,7 +26430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -49.6}
+  m_AnchoredPosition: {x: -62, y: 1}
   m_SizeDelta: {x: 821.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1977525770
@@ -26327,8 +26472,8 @@ MonoBehaviour:
   m_text: Stay out of sight, or move slowly to go unnoticed or get thrown back in
     the trash...be careful or you may crack under pressure...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
+  m_sharedMaterial: {fileID: -3235237343235751975, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -27746,7 +27891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -49.6}
+  m_AnchoredPosition: {x: -62, y: 3}
   m_SizeDelta: {x: 821.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044948634
@@ -27769,11 +27914,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press Spacebar to jump, \nWASD to move, \nhold left mouse and drag to
-    move camera, \nmiddle mouse scroll to zoom "
+  m_text: "Press Spacebar to jump, \nWASD to move, \nhold left mouse to move camera,
+    \nmiddle mouse to zoom "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
+  m_sharedMaterial: {fileID: -3235237343235751975, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32436,6 +32581,10 @@ PrefabInstance:
     - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
       propertyPath: m_Name
       value: ArrowObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817166031411572061, guid: ca80f123b12e3d144bb5100f099dad77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

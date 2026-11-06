@@ -53,27 +53,27 @@ public class EggShellDamageVisual : MonoBehaviour
         lastHealth = currentHealth;
 
         //healthy egg...freaking pristine!
-        if (currentHealth >= 8)
+        if (currentHealth <= 2)
         {
             shellRenderer.material = baseMat;
         }
 
         //slightly cracked
-        if (currentHealth >= 5)
+        else if (currentHealth <= 4)
         {
             shellRenderer.material = crack1;
             Debug.Log("crack1");
         }
 
         //moderately cracked
-        if (currentHealth >= 2)
+        if (currentHealth <= 6)
         {
             shellRenderer.material = crack2;
             Debug.Log("crack2");
         }
 
         //hold together egg..you are breaking!!!
-        else if (currentHealth >= 1)
+        else if (currentHealth <= 8)
         {
             shellRenderer.material = crack3;
             Debug.Log("crack3");

@@ -420,9 +420,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 1990713740, guid: a5f55ea1631e6ed49966e61b341f2799, type: 3}
+    m_HighlightedSprite: {fileID: 1436807154, guid: a5f55ea1631e6ed49966e61b341f2799, type: 3}
     m_PressedSprite: {fileID: 1436807154, guid: a5f55ea1631e6ed49966e61b341f2799, type: 3}
-    m_SelectedSprite: {fileID: 626136447, guid: 2efef9d685faf3748be04772a9090b59, type: 3}
+    m_SelectedSprite: {fileID: 1436807154, guid: a5f55ea1631e6ed49966e61b341f2799, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
