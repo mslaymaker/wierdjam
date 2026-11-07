@@ -159,6 +159,8 @@ public class GameManager : MonoBehaviour
         if (gameOver) return;
 
         gameOver = true;
+          Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
 
         Debug.Log("YOU WIN!!! The egg has escaped!");
 
@@ -168,19 +170,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void loseGame()//the customers were not fooled...bad egg...
+public void loseGame()//the customers were not fooled...bad egg...
+{
+    if (gameOver) return;
+
+    gameOver = true;
+
+    Debug.Log("GAME OVER!!! Better luck next hatch.");
+
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
+
+    if (!string.IsNullOrEmpty(gameOverScene))
     {
-        if (gameOver) return;
-
-        gameOver = true;
-
-        Debug.Log("GAME OVER!!! Better luck next hatch.");
-
-        if (!string.IsNullOrEmpty(gameOverScene))
-        {
-            SceneManager.LoadScene(gameOverScene);
-        }
+        SceneManager.LoadScene(gameOverScene);
     }
+}
 
     public int getCurrentHealth()
     {

@@ -854,7 +854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -49.6}
+  m_AnchoredPosition: {x: 6, y: -49.6}
   m_SizeDelta: {x: 821.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89384920
@@ -920,8 +920,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4156,6 +4156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   wallBufferDistance: 0.2
+  cameraRadius: 0.5
 --- !u!82 &330585549
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12450,6 +12451,7 @@ MonoBehaviour:
   highDamageAmount: 3
   damageCooldown: 1
   spotSpeed: 2
+  customerEyeHeight: 1.5
   crackSound: {fileID: 8300000, guid: 357c3a1e06181024bbd1d3990088dd1a, type: 3}
   jumpSound: {fileID: 8300000, guid: 5d4b852f89e9c5349a86a2012265325e, type: 3}
   rollingSound: {fileID: 8300000, guid: a7d44a10dace3a24f92ed4f6399ca114, type: 3}
@@ -17173,8 +17175,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.6989958}
+  m_Center: {x: -1.1101435e-16, y: 0, z: -0.34949797}
 --- !u!23 &1314847695
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24105,7 +24107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -464, y: 195}
+  m_AnchoredPosition: {x: -411, y: 166}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1848220678
@@ -26430,7 +26432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: 1}
+  m_AnchoredPosition: {x: 6, y: 1}
   m_SizeDelta: {x: 821.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1977525770
@@ -26470,7 +26472,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Stay out of sight, or move slowly to go unnoticed or get thrown back in
-    the trash...be careful or you may crack under pressure...
+    the trash...use boxes to soften your landing, & be careful or you may crack under
+    pressure...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
   m_sharedMaterial: {fileID: -3235237343235751975, guid: 7c7175145a57b54438c8bb83f5ab4783, type: 2}
@@ -26497,8 +26500,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -27891,7 +27894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: 3}
+  m_AnchoredPosition: {x: 6, y: 3}
   m_SizeDelta: {x: 821.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044948634
@@ -27942,8 +27945,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -30369,8 +30372,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.278904}
+  m_Center: {x: 0, y: 0, z: 0.045743942}
 --- !u!4 &1532985838252043478
 Transform:
   m_ObjectHideFlags: 0
@@ -30514,8 +30517,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.6196327}
+  m_Center: {x: 0, y: 0, z: 0.21261787}
 --- !u!4 &1657483820769633406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2041398328800395152, guid: 48292513dfa563e4ea1c9146688ff4ed, type: 3}
@@ -31139,8 +31142,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.549851}
+  m_Center: {x: -4.323779e-18, y: 0, z: -0.27492553}
 --- !u!33 &2713354152713266623
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -31184,8 +31187,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.2803346}
+  m_Center: {x: -9.2389325e-18, y: 0, z: 0.14016736}
 --- !u!1 &2787882383560643853
 GameObject:
   m_ObjectHideFlags: 0
@@ -31931,8 +31934,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.5829458}
+  m_Center: {x: 0, y: 0, z: 0.2914729}
 --- !u!4 &4333520982511406433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2041398328800395152, guid: 48292513dfa563e4ea1c9146688ff4ed, type: 3}
@@ -32794,8 +32797,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.942023}
+  m_Center: {x: -8.85831e-18, y: 0, z: 0.47101164}
 --- !u!4 &6157354916015574529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5546377038740217805, guid: 740ae1c01f2ccf944b121861b9ad39f5, type: 3}
@@ -33168,8 +33171,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.7339821}
+  m_Center: {x: 0, y: 0, z: -0.36699104}
 --- !u!1 &7539921953042367379
 GameObject:
   m_ObjectHideFlags: 0

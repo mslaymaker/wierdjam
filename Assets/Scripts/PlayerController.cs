@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Spotting Settings")]//how fast the egg must be moving before customers get suspicious
     [SerializeField] private float spotSpeed = 2f;
-
+    [SerializeField] private float customerEyeHeight = 1.5f;
     [Header("Audio")]//sounds related to egg movement and damage
     [SerializeField] private AudioClip crackSound;
     [SerializeField] private AudioClip jumpSound;
@@ -151,17 +151,64 @@ public class PlayerController : MonoBehaviour
     }
 
     private void updateSpottedStatus()//decide if customers currently consider the egg suspicious
+{
+    isSpotted = false;
+
+    //don't even bother checking unless we're moving suspiciously fast
+    if (getCurrentSpeed() < spotSpeed)
     {
-        isSpotted = activeCustomerTriggers.Count > 0 && getCurrentSpeed() >= spotSpeed;
-
-        //only play the alert sound when first becoming spotted
-        if (isSpotted && !wasSpotted)
-        {
-            playSpottedSound();
-        }
-
-        wasSpotted = isSpotted;
+        wasSpotted = false;
+        return;
     }
+
+    foreach (Collider trigger in activeCustomerTriggers)
+    {
+        if (hasLineOfSight(trigger))
+        {
+            isSpotted = true;
+            break;
+        }
+    }
+
+    //only play the alert sound when first becoming spotted
+    if (isSpotted && !wasSpotted)
+    {
+        playSpottedSound();
+    }
+
+    wasSpotted = isSpotted;
+}
+
+private bool hasLineOfSight(Collider customerTrigger)//see if anything is blocking the customer's view
+{
+    if (customerTrigger == null) return false;
+
+    Transform customer = customerTrigger.transform.parent;
+
+    if (customer == null) return false;
+
+    Vector3 playerPosition =
+        transform.position;
+
+    Vector3 customerPosition =
+        customer.position +
+        Vector3.up * customerEyeHeight;
+
+    Vector3 direction =
+        customerPosition - playerPosition;
+
+    RaycastHit hit;
+
+    if (Physics.Raycast(playerPosition, direction.normalized, out hit, direction.magnitude))
+    {
+        Debug.Log("Ray Hit: " + hit.collider.name);
+
+        return hit.collider.transform == customer ||
+               hit.collider.transform.IsChildOf(customer);
+    }
+
+    return false;
+}
 
     private void playSpottedSound()//pick a random alert sound and slightly randomize pitch
     {

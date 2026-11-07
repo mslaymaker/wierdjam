@@ -21,7 +21,8 @@ public class CameraController : MonoBehaviour
 
     [Header("Collision Settings")]//settings used to keep the camera out of walls and shelves
     [SerializeField] private LayerMask collisionLayers;
-    [SerializeField] private float wallBufferDistance = 0.3f;
+    [SerializeField] private float wallBufferDistance = 0.75f;
+    [SerializeField] private float cameraRadius = 0.5f;
 
     //current camera orbit around the player
     private float orbitYaw;
@@ -113,14 +114,26 @@ public class CameraController : MonoBehaviour
 
         Vector3 rayDirection = desiredPosition - targetPosition;
 
-        if (Physics.Raycast(targetPosition, rayDirection.normalized, out hit, rayDirection.magnitude, collisionLayers))
+        if (Physics.SphereCast(
+            targetPosition,
+            cameraRadius,
+            rayDirection.normalized,
+            out hit,
+            rayDirection.magnitude,
+            collisionLayers))
         {
             //pull the camera in front of the obstacle
-            desiredPosition = hit.point - rayDirection.normalized * wallBufferDistance;
+            desiredPosition =
+                hit.point -
+                rayDirection.normalized *
+                (wallBufferDistance + cameraRadius);
         }
 
         //smoothly chase the target position instead of snapping to it
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPosition,
+            followSpeed * Time.deltaTime);
 
         //keep the player in view at all times
         transform.LookAt(targetPosition);
@@ -134,5 +147,8 @@ public class CameraController : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(targetPosition, transform.position);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, cameraRadius);
     }
 }
