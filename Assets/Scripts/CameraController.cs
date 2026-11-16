@@ -23,10 +23,16 @@ public class CameraController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayers;
     [SerializeField] private float wallBufferDistance = 0.75f;
     [SerializeField] private float cameraRadius = 0.5f;
+    [SerializeField] private float minimumCameraDistance = 2.5f;
+    [SerializeField] private float collisionShrinkSpeed = 15f;
+    [SerializeField] private float collisionReturnSpeed = 3f;
 
     //current camera orbit around the player
     private float orbitYaw;
     private float orbitPitch;
+
+    //current distance the camera is using from the player
+    private float currentCameraDistance;
 
     private void Start()//grab the camera's starting orientation
     {
@@ -34,6 +40,8 @@ public class CameraController : MonoBehaviour
 
         orbitYaw = angles.y;
         orbitPitch = angles.x;
+
+        currentCameraDistance = followDistance;
     }
 
     private void Update()
@@ -59,7 +67,10 @@ public class CameraController : MonoBehaviour
             followDistance -= scroll * zoomSpeed * Time.deltaTime;
 
             //keep things reasonable so the camera doesn't end up in another zip code
-            followDistance = Mathf.Clamp(followDistance, minZoom, maxZoom);
+            followDistance = Mathf.Clamp(
+                followDistance,
+                minZoom,
+                maxZoom);
         }
     }
 
@@ -92,7 +103,10 @@ public class CameraController : MonoBehaviour
             orbitPitch -= mouseDelta.y * rotationSpeed * Time.deltaTime;
 
             //don't let the player flip the camera upside down like a maniac
-            orbitPitch = Mathf.Clamp(orbitPitch, minPitch, maxPitch);
+            orbitPitch = Mathf.Clamp(
+                orbitPitch,
+                minPitch,
+                maxPitch);
         }
     }
 
@@ -101,18 +115,28 @@ public class CameraController : MonoBehaviour
         if (player == null) return;
 
         //aim slightly above the player so we're not staring at their feet all day
-        Vector3 targetPosition = player.transform.position + Vector3.up * heightOffset;
+        Vector3 targetPosition =
+            player.transform.position +
+            Vector3.up * heightOffset;
 
         //build a rotation from the current orbit angles
-        Quaternion rotation = Quaternion.Euler(orbitPitch, orbitYaw, 0f);
+        Quaternion rotation =
+            Quaternion.Euler(
+                orbitPitch,
+                orbitYaw,
+                0f);
 
-        //where the camera would like to be if nothing blocks it
-        Vector3 desiredPosition = targetPosition - (rotation * Vector3.forward * followDistance);
+        //assume we can use the desired zoom distance
+        float targetDistance = followDistance;
 
-        //see if a wall or shelf is trying to get between the player and camera
+        Vector3 desiredPosition =
+            targetPosition -
+            (rotation * Vector3.forward * followDistance);
+
+        Vector3 rayDirection =
+            desiredPosition - targetPosition;
+
         RaycastHit hit;
-
-        Vector3 rayDirection = desiredPosition - targetPosition;
 
         if (Physics.SphereCast(
             targetPosition,
@@ -122,33 +146,65 @@ public class CameraController : MonoBehaviour
             rayDirection.magnitude,
             collisionLayers))
         {
-            //pull the camera in front of the obstacle
-            desiredPosition =
-                hit.point -
-                rayDirection.normalized *
-                (wallBufferDistance + cameraRadius);
+            targetDistance = Mathf.Max(
+                minimumCameraDistance,
+                hit.distance - wallBufferDistance);
         }
 
-        //smoothly chase the target position instead of snapping to it
+        //shrink camera distance quickly when obstructed
+        if (targetDistance < currentCameraDistance)
+        {
+            currentCameraDistance = Mathf.Lerp(
+                currentCameraDistance,
+                targetDistance,
+                collisionShrinkSpeed * Time.deltaTime);
+        }
+        //return to normal distance more slowly
+        else
+        {
+            currentCameraDistance = Mathf.Lerp(
+                currentCameraDistance,
+                targetDistance,
+                collisionReturnSpeed * Time.deltaTime);
+        }
+
+        desiredPosition =
+            targetPosition -
+            (rotation * Vector3.forward * currentCameraDistance);
+
+        //move camera
         transform.position = Vector3.Lerp(
             transform.position,
             desiredPosition,
             followSpeed * Time.deltaTime);
 
-        //keep the player in view at all times
-        transform.LookAt(targetPosition);
+        //smoothly rotate toward the player
+        Quaternion targetRotation =
+            Quaternion.LookRotation(
+                targetPosition - transform.position);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            followSpeed * Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()//show where the camera wants to be
     {
         if (player == null) return;
 
-        Vector3 targetPosition = player.transform.position + Vector3.up * heightOffset;
+        Vector3 targetPosition =
+            player.transform.position +
+            Vector3.up * heightOffset;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(targetPosition, transform.position);
+        Gizmos.DrawLine(
+            targetPosition,
+            transform.position);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, cameraRadius);
+        Gizmos.DrawWireSphere(
+            transform.position,
+            cameraRadius);
     }
 }

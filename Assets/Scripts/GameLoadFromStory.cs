@@ -13,6 +13,9 @@ public class DelayedSceneLoader : MonoBehaviour
     private void Start()//begin counting down as soon as the scene starts
     {
         StartCoroutine(loadSceneAfterDelay());
+    
+    Cursor.lockState = CursorLockMode.None;
+    Cursor.visible = true;
     }
 
     private IEnumerator loadSceneAfterDelay()//wait for the desired time then load the next scene
